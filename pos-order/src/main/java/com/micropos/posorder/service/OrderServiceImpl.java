@@ -1,5 +1,7 @@
 package com.micropos.posorder.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements OrderService{
     @Autowired
     private StreamBridge streamBridge;
+
+    public static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Override
 	public
@@ -23,6 +27,7 @@ public class OrderServiceImpl implements OrderService{
                 cnt++;
         }
         String deliveryInfo = String.format("%d|%s",cnt,addr);
+        log.info("place order {}", deliveryInfo);
         return streamBridge.send("deliver-order",deliveryInfo);
     }
 }

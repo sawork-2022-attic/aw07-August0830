@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    function:
+      definition: deliverCart
+    stream:
+      function:
+        bindings:
+          deliverCart-in-0: output
+      bindings:
+        delivery:
+          destination: delivery
+      rabbit:
+        bindings:
+          output:
+            consumer:
+              declare-exchange: false
