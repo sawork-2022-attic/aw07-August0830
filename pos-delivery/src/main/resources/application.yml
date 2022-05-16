@@ -5,7 +5,7 @@ spring:
     stream:
       function:
         bindings:
-          deliverCart-in-0: output
+          deliverCart-in-0: deliver-order #output
       bindings:
         delivery:
           destination: delivery

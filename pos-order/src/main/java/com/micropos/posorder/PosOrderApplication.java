@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication(scanBasePackages = { "com.micropos.order.*" })
+@SpringBootApplication(scanBasePackages = { "com.micropos.posorder.*" })
 // @EnableDiscoveryClient
 public class PosOrderApplication {
 
@@ -20,12 +20,12 @@ public class PosOrderApplication {
 		SpringApplication.run(PosOrderApplication.class, args);
 	}
 
-	@Bean
-	public Supplier<String> placeOrder(){
-		Supplier<String> orderSupplier = ()->{
-			return "productA|productB|addr:CityA";
-		};
-		return orderSupplier;
-	}
+	// @Bean
+	// public Supplier<String> placeOrder(){
+	// 	Supplier<String> orderSupplier = ()->{
+	// 		return "3|addr:CityA";
+	// 	};
+	// 	return orderSupplier;
+	// }
 
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("posorder")
+@RequestMapping("/api")
 public class OrderController implements OrderApi{
     @Autowired
     private OrderService orderService;
@@ -22,7 +22,6 @@ public class OrderController implements OrderApi{
     public static final Logger log = LoggerFactory.getLogger(OrderController.class);
 
     @Override
-    @PostMapping("/order/place")
     public ResponseEntity<Boolean> placeOrder(@RequestBody String orderInfo){
         
         log.info("order controller: {}", orderInfo);
