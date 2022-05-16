@@ -194,7 +194,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /order/place:
     post: 
-      sumary: place an order
+      summary: place an order
       operationId: placeOrder
       tags:
         - order
@@ -203,9 +203,9 @@ paths:
         content:
           application/json:
             schema:
-              type: String
+              type: string
         required: true
-      response:
+      responses:
         '200':
           description: Expected
           content:
@@ -217,7 +217,7 @@ paths:
           content:
             application/json:
               schema:
-              $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     Carts:

@@ -1,6 +1,16 @@
 spring:
   application:
     name: pos-order
+  cloud:
+    function:
+      definition: placeOrder
+    stream:
+      function:
+        bindings:
+          deliver-order: String
+      bindings:
+        loan:
+          destination: output
 
 server:
   port: 8085
