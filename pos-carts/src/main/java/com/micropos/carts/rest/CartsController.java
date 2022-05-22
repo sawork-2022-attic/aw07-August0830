@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("poscarts")
+// @RequestMapping("poscarts")
 public class CartsController implements CartsApi{
 
     private CartService cartService;
@@ -27,7 +27,6 @@ public class CartsController implements CartsApi{
     }
 
     @Override
-    @GetMapping("/carts")
     public ResponseEntity<List<CartDto>> listCarts(){
         List<CartDto> carts = new ArrayList<>(cartMapper.toCartDtos(cartService.getAllCarts()));
         if(carts.isEmpty()){
@@ -37,7 +36,6 @@ public class CartsController implements CartsApi{
     }
 
     @Override
-    @PostMapping("/carts")
     public ResponseEntity<CartDto> addCart(@RequestBody CartDto cartDto){
         Cart cart = cartMapper.toCart(cartDto);
         if(cart==null)
@@ -50,7 +48,6 @@ public class CartsController implements CartsApi{
     }
 
     @Override
-    @GetMapping("/carts/{cartId}")
     public ResponseEntity<CartDto> getCartById(@PathVariable("cartId") Integer id){
         Cart cart = cartService.getCartById(id);
         if(cart==null)
@@ -60,7 +57,6 @@ public class CartsController implements CartsApi{
     }
 
     @Override
-    @PostMapping("/carts/{cartId}")
     public ResponseEntity<CartDto> addItemToCart(@PathVariable("cartId") Integer cartId,@RequestBody CartItemDto cartItemDto){
         Cart cart = cartService.getCartById(cartId);
         if(cart==null)
@@ -74,7 +70,6 @@ public class CartsController implements CartsApi{
     }
 
     @Override
-    @GetMapping("/carts/{cartId}/totalAmount")
     public ResponseEntity<Double> getCartTotalAmount(@PathVariable("cartId") Integer cartId) {
         double totalAmount =  cartService.checkout(cartId);
         if(cartId==-1d)
