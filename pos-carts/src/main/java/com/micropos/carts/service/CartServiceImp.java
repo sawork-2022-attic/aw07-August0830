@@ -8,31 +8,19 @@ import com.micropos.carts.model.CartItem;
 import com.micropos.carts.repository.CartRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.data.util.Streamable;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CartServiceImp implements CartService {
 
     private CartRepository cartRepository;
-    @LoadBalanced
-    private RestTemplate restTemplate;
     /**
      * @param cartRepository the cartRepository to set
      */
     @Autowired
     public void setCartRepository(CartRepository cartRepository) {
         this.cartRepository = cartRepository;
-    }
-
-    @Autowired
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -51,16 +39,9 @@ public class CartServiceImp implements CartService {
             return -1.0;
         Cart realCart = cart.get();
         double sum = 0;
-        StringBuilder orderBuilder = new StringBuilder();
         for(CartItem item: realCart.cartItems()){
             sum += item.price()*item.quantity();
-            orderBuilder.append(item.productName()+"|");
         }
-        orderBuilder.append("addr:CityA");
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request = new HttpEntity<String>(orderBuilder.toString());
-        restTemplate.postForObject("http://localhost:8085/order/place", request, Boolean.class);
         return sum;
     }
 
